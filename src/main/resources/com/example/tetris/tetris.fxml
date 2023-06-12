@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tetris.HelloController">
+    <children>
+        <TextField fx:id="textBox" layoutX="2.0" opacity="0.01" prefHeight="352.0" prefWidth="576.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+            <effect>
+                <ColorAdjust />
+            </effect>
+        </TextField>
+        <Rectangle fx:id="x1y1" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y1" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y1" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y1" fill="#3c3e3c" height="32.0" layoutX="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y1" fill="#3c3e3c" height="32.0" layoutX="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y1" fill="#3c3e3c" height="32.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y1" fill="#3c3e3c" height="32.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y1" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y1" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y1" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y2" fill="#3c3e3c" height="32.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y2" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y2" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y2" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y2" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y2" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y2" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y2" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y2" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y2" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y3" fill="#3c3e3c" height="32.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y3" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y3" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y3" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y3" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y3" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y3" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y3" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y3" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y3" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y4" fill="#3c3e3c" height="32.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y4" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y4" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y4" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y4" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y4" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y4" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y4" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y4" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y4" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y5" fill="#3c3e3c" height="32.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y5" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y5" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y5" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y5" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y5" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y5" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y5" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y5" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y5" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y6" fill="#3c3e3c" height="32.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y6" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y6" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y6" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y6" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y6" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y6" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y6" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y6" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y6" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y7" fill="#3c3e3c" height="32.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y7" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y7" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y7" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y7" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y7" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y7" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y7" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y7" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y7" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y8" fill="#3c3e3c" height="32.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y8" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y8" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y8" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y8" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y8" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y8" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y8" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y8" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y8" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y9" fill="#3c3e3c" height="32.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y9" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y9" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y9" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y9" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y9" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y9" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y9" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y9" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y9" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y10" fill="#3c3e3c" height="32.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y10" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y10" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y10" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y10" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y10" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y10" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y10" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y10" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y10" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y11" fill="#3c3e3c" height="32.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y11" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y11" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y11" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y11" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y11" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y11" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y11" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y11" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y11" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y12" fill="#3c3e3c" height="32.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y12" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y12" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y12" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y12" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y12" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y12" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y12" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y12" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y12" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y13" fill="#3c3e3c" height="32.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y13" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y13" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y13" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y13" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y13" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y13" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y13" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y13" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y13" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y14" fill="#3c3e3c" height="32.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y14" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y14" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y14" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y14" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y14" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y14" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y14" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y14" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y14" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y15" fill="#3c3e3c" height="32.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y15" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y15" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y15" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y15" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y15" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y15" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y15" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y15" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y15" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="448.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y16" fill="#3c3e3c" height="32.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y16" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y16" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y16" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y16" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y16" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y16" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y16" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y16" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y16" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y17" fill="#3c3e3c" height="32.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y17" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y17" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y17" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y17" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y17" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y17" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y17" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y17" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y17" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="512.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y18" fill="#3c3e3c" height="32.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y18" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y18" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y18" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y18" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y18" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y18" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y18" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y18" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y18" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y19" fill="#3c3e3c" height="32.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y19" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y19" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y19" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y19" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y19" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y19" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y19" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y19" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y19" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="576.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <!-- Добавьте прямоугольники для остальных рядов -->
+
+        <Rectangle fx:id="x1y20" fill="#3c3e3c" height="32.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y20" fill="#3c3e3c" height="32.0" layoutX="32.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y20" fill="#3c3e3c" height="32.0" layoutX="64.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y20" fill="#3c3e3c" height="32.0" layoutX="96.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y20" fill="#3c3e3c" height="32.0" layoutX="128.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y20" fill="#3c3e3c" height="32.0" layoutX="160.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y20" fill="#3c3e3c" height="32.0" layoutX="192.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y20" fill="#3c3e3c" height="32.0" layoutX="224.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y20" fill="#3c3e3c" height="32.0" layoutX="256.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y20" fill="#3c3e3c" height="32.0" layoutX="288.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Label layoutX="495.0" layoutY="6.0" prefHeight="17.0" prefWidth="60.0" text="Moves left:" />
+        <Button fx:id="Change" text="change" onAction="#change"/>
+    </children>
+</AnchorPane>
