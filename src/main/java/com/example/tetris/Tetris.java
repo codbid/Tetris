@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Tetris {
-    public static int globalX = 1;
-    public static int globalY = 1;
+    private static int globalX, globalY= 1;
+    public static Figures figures = new Figures();
+
+
 
     public static String defaultColor = "0x3c3e3cff";
     public static int writeKeyCode(KeyCode key){
