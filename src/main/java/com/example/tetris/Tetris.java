@@ -1,5 +1,6 @@
 package com.example.tetris;
 
+import eu.hansolo.toolbox.tuples.Pair;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
