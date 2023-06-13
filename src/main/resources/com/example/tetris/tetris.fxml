@@ -19,6 +19,50 @@
                 <ColorAdjust />
             </effect>
         </TextField>
+        <Rectangle fx:id="x1ym3" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2ym3" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3ym3" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4ym3" fill="#3c3e3c" height="32.0" layoutX="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5ym3" fill="#3c3e3c" height="32.0" layoutX="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6ym3" fill="#3c3e3c" height="32.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7ym3" fill="#3c3e3c" height="32.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8ym3" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9ym3" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10ym3" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <Rectangle fx:id="x1ym2" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2ym2" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3ym2" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4ym2" fill="#3c3e3c" height="32.0" layoutX="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5ym2" fill="#3c3e3c" height="32.0" layoutX="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6ym2" fill="#3c3e3c" height="32.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7ym2" fill="#3c3e3c" height="32.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8ym2" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9ym2" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10ym2" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <Rectangle fx:id="x1ym1" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2ym1" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3ym1" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4ym1" fill="#3c3e3c" height="32.0" layoutX="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5ym1" fill="#3c3e3c" height="32.0" layoutX="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6ym1" fill="#3c3e3c" height="32.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7ym1" fill="#3c3e3c" height="32.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8ym1" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9ym1" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10ym1" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
+        <Rectangle fx:id="x1y0" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x2y0" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x3y0" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x4y0" fill="#3c3e3c" height="32.0" layoutX="96.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x5y0" fill="#3c3e3c" height="32.0" layoutX="128.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x6y0" fill="#3c3e3c" height="32.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x7y0" fill="#3c3e3c" height="32.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x8y0" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x9y0" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+        <Rectangle fx:id="x10y0" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
         <Rectangle fx:id="x1y1" fill="#3c3e3c" height="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
         <Rectangle fx:id="x2y1" fill="#3c3e3c" height="32.0" layoutX="32.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
         <Rectangle fx:id="x3y1" fill="#3c3e3c" height="32.0" layoutX="64.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
@@ -29,6 +73,7 @@
         <Rectangle fx:id="x8y1" fill="#3c3e3c" height="32.0" layoutX="224.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
         <Rectangle fx:id="x9y1" fill="#3c3e3c" height="32.0" layoutX="256.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
         <Rectangle fx:id="x10y1" fill="#3c3e3c" height="32.0" layoutX="288.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+
 
         <!-- Добавьте прямоугольники для остальных рядов -->
 

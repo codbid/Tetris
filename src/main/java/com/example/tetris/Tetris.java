@@ -17,11 +17,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Tetris {
-    private static int globalX, globalY= 1;
-    public static Figures figures = new Figures();
-
-
-
+    private static int globalX, globalY = 1;
     public static String defaultColor = "0x3c3e3cff";
     public static int writeKeyCode(KeyCode key){
         if(key == KeyCode.W){
@@ -89,7 +85,9 @@ public class Tetris {
         Rectangle rectangle = (Rectangle) scene.lookup("#x"+"1"+"y"+"1");
         globalX = 1;
         globalY = 1;
-
+        Figures.Figure.Point[] f = Figures.get_figure();
+        System.out.println(f[0].x);
+        System.out.print(f[0].y);
         rectangle.setFill(Color.web("0x0000FF"));
     }
     public static void swap(Stage stage, int x_start, int y_start, int x_dest, int y_dest) {
