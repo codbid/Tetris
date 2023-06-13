@@ -26,8 +26,6 @@ public class HelloController {
 
     @FXML
     protected void change() throws Exception {
-        Stage stage;
-        stage = (Stage) Change.getScene().getWindow();
         Tetris.new_figure();
     }
 

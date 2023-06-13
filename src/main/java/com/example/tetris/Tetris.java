@@ -53,7 +53,7 @@ public class Tetris {
                 int startX = globalX;
                 int startY = globalY;
                 System.out.println(writeKeyCode(key));
-                if (check_collision())
+                if (collision_down())
                 {
                     try {
                         switch (writeKeyCode(key)) {
@@ -98,9 +98,8 @@ public class Tetris {
         }
         return false;
     }
-    public static void change_color(Stage stage_g, int x0, int y0) {
+    public static void change_color(int x0, int y0) {
         System.out.println(x0+" "+y0);
-        Scene scene = stage.getScene();
         Rectangle rectangle = get_rectangle(x0, y0);
         rectangle.setFill(Color.web("0x0000FF"));
     }
@@ -120,11 +119,39 @@ public class Tetris {
         System.out.println(" ");
     }
 
-    public static boolean check_collision() {
+    public static boolean collision_down() {
         for (Figures.Figure.Point point : figure)
         {
             if (point.y < 20) {
                 Rectangle rectangle_down = get_rectangle(point.x, point.y+1);
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                    return false;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+
+    public static boolean collision_right() {
+        for (Figures.Figure.Point point : figure)
+        {
+            if (point.x < 10) {
+                Rectangle rectangle_down = get_rectangle(point.x+1, point.y);
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                    return false;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+
+    public static boolean collision_left() {
+        for (Figures.Figure.Point point : figure)
+        {
+            if (point.x > 1) {
+                Rectangle rectangle_down = get_rectangle(point.x-1, point.y);
                 if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
                     return false;
             }
@@ -141,7 +168,7 @@ public class Tetris {
         int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) - 1;
         for(int i = 0; i < 4; i++)
         {
-            change_color(stage, figure[i].x + x0, figure[i].y - y0);
+            change_color(figure[i].x + x0, figure[i].y - y0);
             figure[i].x += x0;
             figure[i].y -= y0;
         }
@@ -179,28 +206,31 @@ public class Tetris {
 
     public static void move_right()
     {
-        int xMax = Figures.Figure.get_right(figure);
-        for(; xMax != -4; xMax--) {
-            for (int i = 0; i < 4; i++) {
-                if (figure[i].x == xMax) {
-                    int temp_x = figure[i].x;
-                    figure[i].x++;
-                    swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+        if(collision_right()) {
+            int xMax = Figures.Figure.get_right(figure);
+            for (; xMax != -4; xMax--) {
+                for (int i = 0; i < 4; i++) {
+                    if (figure[i].x == xMax) {
+                        int temp_x = figure[i].x;
+                        figure[i].x++;
+                        swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                    }
                 }
             }
         }
     }
 
-    public static void move_left()
-    {
-        int xMin = Figures.Figure.get_left(figure);
-        System.out.println(xMin);
-        for(int k = 0; k < 4; k++, xMin++) {
-            for (int i = 0; i < 4; i++) {
-                if (figure[i].x == xMin) {
-                    int temp_x = figure[i].x;
-                    figure[i].x--;
-                    swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+    public static void move_left() {
+        if (collision_left()) {
+            int xMin = Figures.Figure.get_left(figure);
+            System.out.println(xMin);
+            for (int k = 0; k < 4; k++, xMin++) {
+                for (int i = 0; i < 4; i++) {
+                    if (figure[i].x == xMin) {
+                        int temp_x = figure[i].x;
+                        figure[i].x--;
+                        swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                    }
                 }
             }
         }
