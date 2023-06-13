@@ -24,6 +24,10 @@ public class Tetris {
     private static int nRotates;
     private static Stage stage;
     private static Figures.Figure.Point[] figure;
+    public static int randint(int min, int max)
+    {
+        return (int)(Math.random()*((max-min)+1))+min;
+    }
     public static int writeKeyCode(KeyCode key){
         if(key == KeyCode.W){
             if(Figures.Figure.get_up(figure) > 1)
@@ -77,6 +81,8 @@ public class Tetris {
                         System.out.println(e);
                     }
                 }
+                else
+                    check_line();
             }
         });
 
@@ -264,9 +270,39 @@ public class Tetris {
             System.out.println(Figures.Figure.get_left(rotatedFigure) >= 1);
             System.out.println(!figure_intersect(rotatedFigure));
         }
-        Tetris.change_color(figure[0].x, figure[0].y, "#ad0909");
-        Tetris.change_color(figure[1].x, figure[1].y, "#09ad24");
-        Tetris.change_color(figure[2].x, figure[2].y, "#0b1d96");
-        Tetris.change_color(figure[3].x, figure[3].y, "#ffffff");
+    }
+
+    public static void check_line()
+    {
+        for(int line = 1; line <= 20; line++)
+        {
+            boolean filled = true;
+            for(int row = 1; row <= 10; row++)
+            {
+                if(Objects.equals(get_rectangle(row, line).getFill().toString(), defaultColor))
+                {
+                    filled = false;
+                    break;
+                }
+            }
+            if(filled)
+            {
+                for(int row = 1; row <= 10; row++)
+                    change_color(row, line, defaultColor);
+                for(int i = line; i >= 1; i--) {
+                    for (int row = 1; row <= 10; row++) {
+                        swap(row, i - 1, row, i);
+                    }
+                }
+            }
+        }
+    }
+
+    public static class Game implements Runnable
+    {
+        @Override
+        public void run() {
+
+        }
     }
 }

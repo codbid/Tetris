@@ -119,7 +119,7 @@ public class Figures {
 
     public static Pair<Integer, Figure.Point[]> get_figure() {
         Figures keep = new Figures();
-        int a = 6;
+        int a = Tetris.randint(0, 6);
         Figure.Point[] figure;
         figure = figures[a].figure;
         return new Pair<>(a, figure);
