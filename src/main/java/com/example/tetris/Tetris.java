@@ -1,6 +1,7 @@
 package com.example.tetris;
 
 import eu.hansolo.toolbox.tuples.Pair;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,17 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.Group;
 import javafx.stage.Stage;
+import java.util.concurrent.TimeUnit;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
 public class Tetris {
-    private static int globalX, globalY = 1;
     public static String defaultColor = "0x3c3e3cff";
     private static int typeOfFigure;
     private static int nRotates;
@@ -56,33 +54,34 @@ public class Tetris {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
             @Override
             public void handle(KeyEvent event) {
-                KeyCode key = event.getCode();
-                if (collision_down())
-                {
-                    try {
-                        switch (writeKeyCode(key)) {
-                            case (1) -> {
-                                move_up();
+                Platform.runLater(() -> {
+                    KeyCode key = event.getCode();
+                    if (collision_down()) {
+                        try {
+                            switch (writeKeyCode(key)) {
+                                case 1:
+                                    move_up();
+                                    break;
+                                case 2:
+                                    move_left();
+                                    break;
+                                case 3:
+                                    move_down();
+                                    break;
+                                case 4:
+                                    move_right();
+                                    break;
+                                case 5:
+                                    rotate();
+                                    break;
                             }
-                            case (2) -> {
-                                move_left();
-                            }
-                            case (3) -> {
-                                  move_down();
-                            }
-                            case (4) -> {
-                                move_right();
-                            }
-                            case (5) -> {
-                                rotate();
-                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
                         }
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    } else {
+                        check_line();
                     }
-                }
-                else
-                    check_line();
+                });
             }
         });
 
@@ -118,6 +117,12 @@ public class Tetris {
     }
     public static void change_color(int x0, int y0, String color) {
         Rectangle rectangle = get_rectangle(x0, y0);
+        System.out.println(rectangle);
+        System.out.println(figure[0].x+" "+figure[0].y);
+        System.out.println(figure[1].x+" "+figure[1].y);
+        System.out.println(figure[2].x+" "+figure[2].y);
+        System.out.println(figure[3].x+" "+figure[3].y);
+        System.out.println(x0+" "+y0);
         rectangle.setFill(Color.web(color));
     }
     public static void swap(int x_start, int y_start, int x_dest, int y_dest) {
@@ -179,10 +184,9 @@ public class Tetris {
         typeOfFigure = temp.getA();
         figure = temp.getB();
         nRotates = 0;
-        int x0 = 5; // поменять
+        int x0 = randint(1, 6); // поменять
         int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) + 1;
-        for(int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             change_color(figure[i].x + x0, figure[i].y - y0, "0x0000FF");
             figure[i].x += x0;
             figure[i].y -= y0;
@@ -297,12 +301,34 @@ public class Tetris {
             }
         }
     }
+    public static void start_game()
+    {
+        new_figure();
+        Game game = new Game();
+        Thread thread = new Thread(game);
+        thread.start();
+    }
 
     public static class Game implements Runnable
     {
         @Override
         public void run() {
-
+            while (true)
+            {
+                new_figure();
+                while (collision_down())
+                {
+                    move_down();
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    check_line();
+                }
+                if(Figures.Figure.get_up(figure) == 1)
+                    return;
+            }
         }
     }
 }

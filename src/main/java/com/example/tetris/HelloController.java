@@ -26,7 +26,7 @@ public class HelloController {
 
     @FXML
     protected void change() throws Exception {
-        Tetris.new_figure();
+        Tetris.start_game();
     }
 
     public void Test2(ActionEvent actionEvent) {
