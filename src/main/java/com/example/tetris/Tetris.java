@@ -53,20 +53,18 @@ public class Tetris {
                 int startX = globalX;
                 int startY = globalY;
                 System.out.println(writeKeyCode(key));
-                if (check_collision(globalX, globalY))
+                if (check_collision())
                 {
                     try {
                         switch (writeKeyCode(key)) {
                             case (1) -> {
                                 move_up();
-                                break;
                             }
                             case (2) -> {
                                 move_left();
                             }
                             case (3) -> {
                                   move_down();
-                                  break;
                             }
                             case (4) -> {
                                 move_right();
@@ -122,17 +120,18 @@ public class Tetris {
         System.out.println(" ");
     }
 
-    public static boolean check_collision(int x, int y) {
+    public static boolean check_collision() {
         for (Figures.Figure.Point point : figure)
         {
-            if (y < 20) {
-                Scene scene = stage.getScene();
+            if (point.y < 20) {
                 Rectangle rectangle_down = get_rectangle(point.x, point.y+1);
-                if (Objects.equals(rectangle_down.getFill().toString(), defaultColor))
-                    return true;
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                    return false;
             }
+            else
+                return false;
         }
-        return false;
+        return true;
     }
 
     public static void new_figure()

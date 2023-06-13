@@ -90,7 +90,7 @@ public class Figures {
         Figure.add_point(figures[3].figure, 1, 1);
         Figure.add_point(figures[3].figure, 2, 1);
         Figure.add_point(figures[3].figure, 2, 2);
-        Figure.add_point(figures[3].figure, 2, 3);
+        Figure.add_point(figures[3].figure, 3, 2);
         // L
         figures[4] = new Figure();
         globalLen = 0;
@@ -116,7 +116,7 @@ public class Figures {
 
     public static Figure.Point[] get_figure() {
         Figures keep = new Figures();
-        int a = 2;
+        int a = 3;
         Figure.Point[] figure;
         figure = figures[a].figure;
         return figure;
