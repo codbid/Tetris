@@ -13,29 +13,34 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
 public class Tetris {
     private static int globalX, globalY = 1;
     public static String defaultColor = "0x3c3e3cff";
+    private static Stage stage;
+    private static Figures.Figure.Point[] figure;
     public static int writeKeyCode(KeyCode key){
         if(key == KeyCode.W){
-            if(globalY > 1)
+            if(Figures.Figure.get_up(figure) > 1)
                 return 1;
         } else if(key == KeyCode.S){
-            if(globalY < 20)
+            if(Figures.Figure.get_down(figure) < 20)
                 return 3;
         } else if(key == KeyCode.A){
-            if(globalX > 1)
+            if(Figures.Figure.get_left(figure) > 1)
                 return 2;
         } else if(key == KeyCode.D){
-            if(globalX < 10)
+            if(Figures.Figure.get_right(figure) < 10)
                 return 4;
         }
+        System.out.println(Figures.Figure.get_up(figure));
         return 0;
     }
-    static void set_scene(Stage stage) throws IOException {
+    static void set_scene(Stage stage_g) throws IOException {
+        stage = stage_g;
         Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("tetris.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
@@ -48,25 +53,23 @@ public class Tetris {
                 int startX = globalX;
                 int startY = globalY;
                 System.out.println(writeKeyCode(key));
-                if (check_collision(stage, globalX, globalY))
+                if (check_collision(globalX, globalY))
                 {
                     try {
                         switch (writeKeyCode(key)) {
                             case (1) -> {
-                                globalY--;
-                                swap(stage, startX, startY, globalX, globalY);
+                                move_up();
+                                break;
                             }
                             case (2) -> {
-                                globalX--;
-                                swap(stage, startX, startY, globalX, globalY);
+                                move_left();
                             }
                             case (3) -> {
-                                globalY++;
-                                swap(stage, startX, startY, globalX, globalY);
+                                  move_down();
+                                  break;
                             }
                             case (4) -> {
-                                globalX++;
-                                swap(stage, startX, startY, globalX, globalY);
+                                move_right();
                             }
                         }
                     } catch (Exception e) {
@@ -79,42 +82,128 @@ public class Tetris {
 
     }
 
-
-    public static void change_color(Stage stage) {
-        Scene scene = stage.getScene();
-        Rectangle rectangle = (Rectangle) scene.lookup("#x"+"1"+"y"+"1");
-        globalX = 1;
-        globalY = 1;
-        Figures.Figure.Point[] f = Figures.get_figure();
-        System.out.println(f[0].x);
-        System.out.print(f[0].y);
-        rectangle.setFill(Color.web("0x0000FF"));
-    }
-    public static void swap(Stage stage, int x_start, int y_start, int x_dest, int y_dest) {
-        Scene scene = stage.getScene();
-        Rectangle rectangle_start = (Rectangle) scene.lookup("#x"+x_start+"y"+y_start);
-        Rectangle rectangle_dest = (Rectangle) scene.lookup("#x"+x_dest+"y"+y_dest);
-        if(Objects.equals(rectangle_dest.getFill().toString(), rectangle_start.getFill().toString()))
-        {
-            globalX = x_start;
-            globalY = y_start;
-            return;
-        }
-        System.out.println(x_start+" "+y_start+" -> "+x_dest+" " +y_dest);
-        Color buffer = (Color) rectangle_dest.getFill();
-        System.out.println(buffer);
-        rectangle_dest.setFill((Color) rectangle_start.getFill());
-        rectangle_start.setFill(buffer);
-        System.out.println(rectangle_dest.getFill());
-    }
-
-    public static boolean check_collision(Stage stage, int x, int y)
+    public static Rectangle get_rectangle(int x, int y)
     {
-        if(y < 20) {
-            Scene scene = stage.getScene();
-            Rectangle rectangle_down = (Rectangle) scene.lookup("#x" + x + "y" + (y + 1));
-            return Objects.equals(rectangle_down.getFill().toString(), defaultColor);
+        Scene scene = stage.getScene();
+        if(y >= 0)
+            return (Rectangle) scene.lookup("#x"+x+"y"+y);
+        else
+            return (Rectangle) scene.lookup("#x"+x+"ym"+y*-1);
+    }
+
+    public static boolean rectangle_in_figure(Rectangle rectangle)
+    {
+        for(Figures.Figure.Point point : figure)
+        {
+            if(Objects.equals(get_rectangle(point.x, point.y), rectangle))
+                return true;
         }
         return false;
+    }
+    public static void change_color(Stage stage_g, int x0, int y0) {
+        System.out.println(x0+" "+y0);
+        Scene scene = stage.getScene();
+        Rectangle rectangle = get_rectangle(x0, y0);
+        rectangle.setFill(Color.web("0x0000FF"));
+    }
+    public static void swap(int x_start, int y_start, int x_dest, int y_dest) {
+        Scene scene = stage.getScene();
+        Rectangle rectangle_start = get_rectangle(x_start, y_start);
+        Rectangle rectangle_dest = get_rectangle(x_dest, y_dest);
+        System.out.println(rectangle_start);
+        System.out.println(rectangle_dest);
+        System.out.println(x_start+" "+y_start+" -> "+x_dest+" " +y_dest);
+        Color buffer = (Color) rectangle_dest.getFill();
+        rectangle_dest.setFill((Color) rectangle_start.getFill());
+        if(Objects.equals(buffer.toString(), defaultColor))
+            rectangle_start.setFill(buffer);
+        System.out.println(rectangle_start);
+        System.out.println(rectangle_dest);
+        System.out.println(" ");
+    }
+
+    public static boolean check_collision(int x, int y) {
+        for (Figures.Figure.Point point : figure)
+        {
+            if (y < 20) {
+                Scene scene = stage.getScene();
+                Rectangle rectangle_down = get_rectangle(point.x, point.y+1);
+                if (Objects.equals(rectangle_down.getFill().toString(), defaultColor))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public static void new_figure()
+    {
+        figure = Figures.get_figure();
+        int x0 = 5; // поменять
+        int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) - 1;
+        for(int i = 0; i < 4; i++)
+        {
+            change_color(stage, figure[i].x + x0, figure[i].y - y0);
+            figure[i].x += x0;
+            figure[i].y -= y0;
+        }
+
+    }
+
+    public static void move_down()
+    {
+        int yMax = Figures.Figure.get_down(figure);
+        for(; yMax != -4; yMax--) {
+            for (int i = 0; i < 4; i++) {
+                if (figure[i].y == yMax) {
+                    int temp_y = figure[i].y;
+                    figure[i].y++;
+                    swap(figure[i].x, temp_y, figure[i].x, figure[i].y);
+                }
+            }
+        }
+    }
+
+    public static void move_up()
+    {
+        int yMin = Figures.Figure.get_up(figure);
+        System.out.println(yMin);
+        for(int k = 0; k < 4; k++, yMin++) {
+            for (int i = 0; i < 4; i++) {
+                if (figure[i].y == yMin) {
+                    int temp_y = figure[i].y;
+                    figure[i].y--;
+                    swap(figure[i].x, temp_y, figure[i].x, figure[i].y);
+                }
+            }
+        }
+    }
+
+    public static void move_right()
+    {
+        int xMax = Figures.Figure.get_right(figure);
+        for(; xMax != -4; xMax--) {
+            for (int i = 0; i < 4; i++) {
+                if (figure[i].x == xMax) {
+                    int temp_x = figure[i].x;
+                    figure[i].x++;
+                    swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                }
+            }
+        }
+    }
+
+    public static void move_left()
+    {
+        int xMin = Figures.Figure.get_left(figure);
+        System.out.println(xMin);
+        for(int k = 0; k < 4; k++, xMin++) {
+            for (int i = 0; i < 4; i++) {
+                if (figure[i].x == xMin) {
+                    int temp_x = figure[i].x;
+                    figure[i].x--;
+                    swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                }
+            }
+        }
     }
 }

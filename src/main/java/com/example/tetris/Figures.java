@@ -12,7 +12,7 @@ public class Figures {
             int y;
         }
 
-        public static int get_down(List<Point> figure)
+        public static int get_down(Point[] figure)
         {
             int max = 0;
             for (Point point : figure) {
@@ -22,12 +22,32 @@ public class Figures {
             return max;
         }
 
-        public static int get_up(List<Point> figure)
+        public static int get_up(Point[] figure)
         {
-            int min = 0;
+            int min = 20;
             for (Point point : figure) {
                 if (point.y < min)
                     min = point.y;
+            }
+            return min;
+        }
+
+        public static int get_right(Point[] figure)
+        {
+            int max = 0;
+            for (Point point : figure) {
+                if (point.x > max)
+                    max = point.x;
+            }
+            return max;
+        }
+
+        public static int get_left(Point[] figure)
+        {
+            int min = 20;
+            for (Point point : figure) {
+                if (point.x < min)
+                    min = point.x;
             }
             return min;
         }
@@ -94,8 +114,7 @@ public class Figures {
         Figure.add_point(figures[6].figure, 2, 2);
     }
 
-    public static Figure.Point[] get_figure()
-    {
+    public static Figure.Point[] get_figure() {
         Figures keep = new Figures();
         int a = 2;
         Figure.Point[] figure;

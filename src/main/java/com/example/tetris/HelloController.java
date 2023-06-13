@@ -28,7 +28,7 @@ public class HelloController {
     protected void change() throws Exception {
         Stage stage;
         stage = (Stage) Change.getScene().getWindow();
-        Tetris.change_color(stage);
+        Tetris.new_figure();
     }
 
     public void Test2(ActionEvent actionEvent) {
