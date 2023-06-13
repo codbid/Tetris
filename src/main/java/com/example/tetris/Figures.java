@@ -1,6 +1,9 @@
 package com.example.tetris;
 
+import eu.hansolo.toolbox.tuples.Pair;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Figures {
@@ -74,16 +77,16 @@ public class Figures {
         figures[1] = new Figure();
         globalLen = 0;
         Figure.add_point(figures[1].figure, 1, 1);
-        Figure.add_point(figures[1].figure, 1, 2);
-        Figure.add_point(figures[1].figure, 1, 3);
-        Figure.add_point(figures[1].figure, 1, 4);
+        Figure.add_point(figures[1].figure, 2, 1);
+        Figure.add_point(figures[1].figure, 3, 1);
+        Figure.add_point(figures[1].figure, 4, 1);
         // S
         figures[2] = new Figure();
         globalLen = 0;
-        Figure.add_point(figures[2].figure, 2, 1);
-        Figure.add_point(figures[2].figure, 3, 1);
         Figure.add_point(figures[2].figure, 1, 2);
         Figure.add_point(figures[2].figure, 2, 2);
+        Figure.add_point(figures[2].figure, 2, 1);
+        Figure.add_point(figures[2].figure, 3, 1);
         // Z
         figures[3] = new Figure();
         globalLen = 0;
@@ -94,31 +97,214 @@ public class Figures {
         // L
         figures[4] = new Figure();
         globalLen = 0;
-        Figure.add_point(figures[4].figure, 1, 1);
         Figure.add_point(figures[4].figure, 1, 2);
-        Figure.add_point(figures[4].figure, 1, 3);
-        Figure.add_point(figures[4].figure, 2, 3);
+        Figure.add_point(figures[4].figure, 2, 2);
+        Figure.add_point(figures[4].figure, 3, 2);
+        Figure.add_point(figures[4].figure, 3, 1);
         // J
         figures[5] = new Figure();
         globalLen = 0;
-        Figure.add_point(figures[5].figure, 2, 1);
+        Figure.add_point(figures[5].figure, 1, 1);
+        Figure.add_point(figures[5].figure, 1, 2);
         Figure.add_point(figures[5].figure, 2, 2);
-        Figure.add_point(figures[5].figure, 2, 3);
-        Figure.add_point(figures[5].figure, 1, 3);
+        Figure.add_point(figures[5].figure, 3, 2);
         // T
         figures[6] = new Figure();
         globalLen = 0;
-        Figure.add_point(figures[6].figure, 1, 1);
-        Figure.add_point(figures[6].figure, 2, 1);
-        Figure.add_point(figures[6].figure, 3, 1);
+        Figure.add_point(figures[6].figure, 1, 2);
         Figure.add_point(figures[6].figure, 2, 2);
+        Figure.add_point(figures[6].figure, 2, 1);
+        Figure.add_point(figures[6].figure, 3, 2);
     }
 
-    public static Figure.Point[] get_figure() {
+    public static Pair<Integer, Figure.Point[]> get_figure() {
         Figures keep = new Figures();
-        int a = 3;
+        int a = 6;
         Figure.Point[] figure;
         figure = figures[a].figure;
-        return figure;
+        return new Pair<>(a, figure);
     }
+
+    public static Figure.Point[] get_rotated_figure(Figure.Point[] figure, int typeOfFigure, int nRotates)
+    {
+        Figures keep = new Figures();
+        Figure.Point[] figure_temp = new Figure.Point[4];
+        globalLen = 0;
+        System.out.println(nRotates);
+        switch (typeOfFigure)
+        {
+            case (0):
+                return figure;
+            case (1):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 2, figure[1].y);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y + 2);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[1].x - 2, figure[2].y);
+                        Figure.add_point(figure_temp, figure[1].x - 1, figure[2].y);
+                        Figure.add_point(figure_temp, figure[1].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[1].x + 1, figure[2].y);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[1].x, figure[2].y - 2);
+                        Figure.add_point(figure_temp, figure[1].x, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[1].x, figure[2].y + 1);
+                    }
+                }
+                break;
+            case (2):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x + 2, figure[3].y);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x, figure[3].y + 2);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x - 2, figure[3].y);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x, figure[2].y - 2);
+                    }
+                }
+                break;
+            case (3):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[0].x, figure[0].y - 2);
+                        Figure.add_point(figure_temp, figure[1].x + 1, figure[1].y - 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[3].y + 1);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 2, figure[0].y);
+                        Figure.add_point(figure_temp, figure[1].x + 1, figure[1].y + 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[2].y + 1);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[0].x, figure[0].y + 2);
+                        Figure.add_point(figure_temp, figure[1].x - 1, figure[1].y + 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[3].y - 1);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 2, figure[0].y);
+                        Figure.add_point(figure_temp, figure[1].x - 1, figure[1].y - 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[2].y - 1);
+                    }
+                }
+                break;
+            case (4):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x + 2, figure[3].y);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x, figure[3].y + 2);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x - 2, figure[3].y);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x, figure[3].y - 2);
+                    }
+                }
+                break;
+            case (5):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[0].x, figure[0].y - 2);
+                        Figure.add_point(figure_temp, figure[1].x - 1, figure[1].y - 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[3].y + 1);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 2, figure[0].y);
+                        Figure.add_point(figure_temp, figure[1].x + 1, figure[1].y - 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[2].y + 1);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[0].x, figure[0].y + 2);
+                        Figure.add_point(figure_temp, figure[1].x + 1, figure[1].y + 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[3].y - 1);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 2, figure[0].y);
+                        Figure.add_point(figure_temp, figure[1].x - 1, figure[1].y + 1);
+                        Figure.add_point(figure_temp, figure[2].x, figure[2].y);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[2].y - 1);
+                    }
+                }
+                break;
+            case (6):
+                switch (nRotates) {
+                    case (3) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[3].y + 1);
+                    }
+                    case (0) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y - 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x + 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[3].y + 1);
+                    }
+                    case (1) -> {
+                        Figure.add_point(figure_temp, figure[0].x + 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y + 1);
+                        Figure.add_point(figure_temp, figure[3].x - 1, figure[3].y - 1);
+                    }
+                    case (2) -> {
+                        Figure.add_point(figure_temp, figure[0].x - 1, figure[0].y + 1);
+                        Figure.add_point(figure_temp, figure[1].x, figure[1].y);
+                        Figure.add_point(figure_temp, figure[2].x - 1, figure[2].y - 1);
+                        Figure.add_point(figure_temp, figure[3].x + 1, figure[3].y - 1);
+                    }
+                }
+                break;
+        }
+        return figure_temp;
+    }
+
 }

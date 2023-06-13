@@ -20,6 +20,8 @@ import java.util.Objects;
 public class Tetris {
     private static int globalX, globalY = 1;
     public static String defaultColor = "0x3c3e3cff";
+    private static int typeOfFigure;
+    private static int nRotates;
     private static Stage stage;
     private static Figures.Figure.Point[] figure;
     public static int writeKeyCode(KeyCode key){
@@ -35,8 +37,9 @@ public class Tetris {
         } else if(key == KeyCode.D){
             if(Figures.Figure.get_right(figure) < 10)
                 return 4;
+        } else if(key == KeyCode.R){
+            return 5;
         }
-        System.out.println(Figures.Figure.get_up(figure));
         return 0;
     }
     static void set_scene(Stage stage_g) throws IOException {
@@ -50,9 +53,6 @@ public class Tetris {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode key = event.getCode();
-                int startX = globalX;
-                int startY = globalY;
-                System.out.println(writeKeyCode(key));
                 if (collision_down())
                 {
                     try {
@@ -69,10 +69,12 @@ public class Tetris {
                             case (4) -> {
                                 move_right();
                             }
+                            case (5) -> {
+                                rotate();
+                            }
                         }
                     } catch (Exception e) {
-                        globalX = startX;
-                        globalY = startY;
+                        System.out.println(e);
                     }
                 }
             }
@@ -98,25 +100,29 @@ public class Tetris {
         }
         return false;
     }
-    public static void change_color(int x0, int y0) {
-        System.out.println(x0+" "+y0);
+    public static boolean figure_intersect(Figures.Figure.Point[] figure)
+    {
+        for(Figures.Figure.Point point : figure)
+        {
+            Rectangle temp = get_rectangle(point.x, point.y);
+            if(!Objects.equals(temp.getFill().toString(), defaultColor) && !rectangle_in_figure(temp))
+                return true;
+        }
+        return false;
+    }
+    public static void change_color(int x0, int y0, String color) {
         Rectangle rectangle = get_rectangle(x0, y0);
-        rectangle.setFill(Color.web("0x0000FF"));
+        rectangle.setFill(Color.web(color));
     }
     public static void swap(int x_start, int y_start, int x_dest, int y_dest) {
         Scene scene = stage.getScene();
         Rectangle rectangle_start = get_rectangle(x_start, y_start);
         Rectangle rectangle_dest = get_rectangle(x_dest, y_dest);
-        System.out.println(rectangle_start);
-        System.out.println(rectangle_dest);
         System.out.println(x_start+" "+y_start+" -> "+x_dest+" " +y_dest);
         Color buffer = (Color) rectangle_dest.getFill();
         rectangle_dest.setFill((Color) rectangle_start.getFill());
         if(Objects.equals(buffer.toString(), defaultColor))
             rectangle_start.setFill(buffer);
-        System.out.println(rectangle_start);
-        System.out.println(rectangle_dest);
-        System.out.println(" ");
     }
 
     public static boolean collision_down() {
@@ -163,12 +169,15 @@ public class Tetris {
 
     public static void new_figure()
     {
-        figure = Figures.get_figure();
+        Pair<Integer, Figures.Figure.Point[]> temp = Figures.get_figure();
+        typeOfFigure = temp.getA();
+        figure = temp.getB();
+        nRotates = 0;
         int x0 = 5; // поменять
-        int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) - 1;
+        int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) + 1;
         for(int i = 0; i < 4; i++)
         {
-            change_color(figure[i].x + x0, figure[i].y - y0);
+            change_color(figure[i].x + x0, figure[i].y - y0, "0x0000FF");
             figure[i].x += x0;
             figure[i].y -= y0;
         }
@@ -234,5 +243,30 @@ public class Tetris {
                 }
             }
         }
+    }
+
+    public static void rotate()
+    {
+        Figures.Figure.Point[] rotatedFigure = Figures.get_rotated_figure(figure, typeOfFigure, nRotates);
+        if(Figures.Figure.get_down(rotatedFigure) <= 20 && Figures.Figure.get_right(rotatedFigure) <= 10 && Figures.Figure.get_left(rotatedFigure) >= 1 && !figure_intersect(rotatedFigure))
+        {
+            for(Figures.Figure.Point point : figure)
+                change_color(point.x, point.y, defaultColor);
+            for(Figures.Figure.Point point : rotatedFigure)
+                change_color(point.x, point.y, "0x0000FF");
+            figure = rotatedFigure;
+            nRotates = nRotates == 3 ? 0 : nRotates + 1;
+        }
+        else
+        {
+            System.out.println(Figures.Figure.get_down(rotatedFigure) <= 20);
+            System.out.println(Figures.Figure.get_right(rotatedFigure) <= 10);
+            System.out.println(Figures.Figure.get_left(rotatedFigure) >= 1);
+            System.out.println(!figure_intersect(rotatedFigure));
+        }
+        Tetris.change_color(figure[0].x, figure[0].y, "#ad0909");
+        Tetris.change_color(figure[1].x, figure[1].y, "#09ad24");
+        Tetris.change_color(figure[2].x, figure[2].y, "#0b1d96");
+        Tetris.change_color(figure[3].x, figure[3].y, "#ffffff");
     }
 }
