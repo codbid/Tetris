@@ -106,6 +106,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>20</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.hansolo</groupId>
+            <artifactId>toolbox</artifactId>
+            <version>17.0.35</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -128,7 +138,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.tetris/com.example.tetris.HelloApplication</mainClass>
+                            <mainClass>com.example.tetris/com.example.tetris.TetrisApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

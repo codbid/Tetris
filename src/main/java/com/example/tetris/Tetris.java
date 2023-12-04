@@ -1,11 +1,11 @@
 package com.example.tetris;
 
-import eu.hansolo.toolbox.tuples.Pair;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -18,316 +18,288 @@ import java.util.Objects;
 
 public class Tetris {
     public static String defaultColor = "0x3c3e3cff";
-    private static int typeOfFigure;
-    private static int nRotates;
     private static Stage stage;
-    private static Figures.Figure.Point[] figure;
-    public static int randint(int min, int max)
-    {
-        return (int)(Math.random()*((max-min)+1))+min;
+    private static Scene scene;
+    private static int playerScore = 0;
+
+    private static Figures.Figure figure;
+
+    public static int randint(int min, int max) {
+        return (int) (Math.random() * ((max - min) + 1)) + min;
     }
-    public static int writeKeyCode(KeyCode key){
-        if(key == KeyCode.W){
-            if(Figures.Figure.get_up(figure) > 1)
-                return 1;
-        } else if(key == KeyCode.S){
-            if(Figures.Figure.get_down(figure) < 20)
+
+    private static int writeKeyCode(KeyCode key) {
+        if (key == KeyCode.W) {
+            return 0;
+        } else if (key == KeyCode.S) {
+            if (figure.getDown() < 20)
                 return 3;
-        } else if(key == KeyCode.A){
-            if(Figures.Figure.get_left(figure) > 1)
+        } else if (key == KeyCode.A) {
+            if (figure.getLeft() > 1)
                 return 2;
-        } else if(key == KeyCode.D){
-            if(Figures.Figure.get_right(figure) < 10)
+        } else if (key == KeyCode.D) {
+            if (figure.getRight() < 10)
                 return 4;
-        } else if(key == KeyCode.R){
+        } else if (key == KeyCode.R) {
             return 5;
         }
         return 0;
     }
-    static void set_scene(Stage stage_g) throws IOException {
+
+    static void setScene(Stage stage_g) throws IOException {
         stage = stage_g;
-        Parent root;
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("tetris.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(TetrisApplication.class.getResource("tetris.fxml"));
+        scene = new Scene(fxmlLoader.load());
+        TetrisController controller = fxmlLoader.getController();
+        scene.setUserData(controller);
         stage.setScene(scene);
         stage.show();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-            @Override
-            public void handle(KeyEvent event) {
-                Platform.runLater(() -> {
-                    KeyCode key = event.getCode();
-                    if (collision_down()) {
-                        try {
-                            switch (writeKeyCode(key)) {
-                                case 1:
-                                    move_up();
-                                    break;
-                                case 2:
-                                    move_left();
-                                    break;
-                                case 3:
-                                    move_down();
-                                    break;
-                                case 4:
-                                    move_right();
-                                    break;
-                                case 5:
-                                    rotate();
-                                    break;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                    } else {
-                        check_line();
-                    }
-                });
-            }
-        });
-
     }
 
-    public static Rectangle get_rectangle(int x, int y)
-    {
+    private static Rectangle getRectangle(int x, int y) {
         Scene scene = stage.getScene();
-        if(y >= 0)
-            return (Rectangle) scene.lookup("#x"+x+"y"+y);
+        if (y > 0)
+            return (Rectangle) scene.lookup("#x" + x + "y" + y);
         else
-            return (Rectangle) scene.lookup("#x"+x+"ym"+y*-1);
+            return (Rectangle) scene.lookup("#x" + x + "ym" + y * -1);
     }
 
-    public static boolean rectangle_in_figure(Rectangle rectangle)
-    {
-        for(Figures.Figure.Point point : figure)
-        {
-            if(Objects.equals(get_rectangle(point.x, point.y), rectangle))
+    private static boolean rectangleInFigure(Rectangle rectangle) {
+        for (Figures.Figure.Point point : figure.getFigure()) {
+            if (Objects.equals(getRectangle(point.x, point.y), rectangle))
                 return true;
         }
         return false;
     }
-    public static boolean figure_intersect(Figures.Figure.Point[] figure)
-    {
-        for(Figures.Figure.Point point : figure)
-        {
-            Rectangle temp = get_rectangle(point.x, point.y);
-            if(!Objects.equals(temp.getFill().toString(), defaultColor) && !rectangle_in_figure(temp))
+
+    private static boolean figureIntersect() {
+        for (Figures.Figure.Point point : figure.getFigure()) {
+            Rectangle temp = getRectangle(point.x, point.y);
+            if (!Objects.equals(temp.getFill().toString(), defaultColor) && !rectangleInFigure(temp))
                 return true;
         }
         return false;
     }
-    public static void change_color(int x0, int y0, String color) {
-        Rectangle rectangle = get_rectangle(x0, y0);
-        System.out.println(rectangle);
-        System.out.println(figure[0].x+" "+figure[0].y);
-        System.out.println(figure[1].x+" "+figure[1].y);
-        System.out.println(figure[2].x+" "+figure[2].y);
-        System.out.println(figure[3].x+" "+figure[3].y);
-        System.out.println(x0+" "+y0);
+
+    private static void changeColor(int x0, int y0, String color) {
+        Rectangle rectangle = getRectangle(x0, y0);
         rectangle.setFill(Color.web(color));
     }
-    public static void swap(int x_start, int y_start, int x_dest, int y_dest) {
-        Scene scene = stage.getScene();
-        Rectangle rectangle_start = get_rectangle(x_start, y_start);
-        Rectangle rectangle_dest = get_rectangle(x_dest, y_dest);
-        System.out.println(x_start+" "+y_start+" -> "+x_dest+" " +y_dest);
+
+    private static void swap(int x_start, int y_start, int x_dest, int y_dest) {
+        Rectangle rectangle_start = getRectangle(x_start, y_start);
+        Rectangle rectangle_dest = getRectangle(x_dest, y_dest);
         Color buffer = (Color) rectangle_dest.getFill();
-        rectangle_dest.setFill((Color) rectangle_start.getFill());
-        if(Objects.equals(buffer.toString(), defaultColor))
+        rectangle_dest.setFill(rectangle_start.getFill());
+        if (Objects.equals(buffer.toString(), defaultColor) && !Objects.equals((Color) rectangle_start.getFill(), buffer))
             rectangle_start.setFill(buffer);
     }
 
-    public static boolean collision_down() {
-        for (Figures.Figure.Point point : figure)
-        {
+    private static boolean collisionDown() {
+        for (Figures.Figure.Point point : figure.getFigure()) {
             if (point.y < 20) {
-                Rectangle rectangle_down = get_rectangle(point.x, point.y+1);
-                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                Rectangle rectangle_down = getRectangle(point.x, point.y + 1);
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangleInFigure(rectangle_down)) {
                     return false;
-            }
-            else
+                }
+            } else
                 return false;
         }
         return true;
     }
 
-    public static boolean collision_right() {
-        for (Figures.Figure.Point point : figure)
-        {
+    private static boolean collisionRight() {
+        for (Figures.Figure.Point point : figure.getFigure()) {
             if (point.x < 10) {
-                Rectangle rectangle_down = get_rectangle(point.x+1, point.y);
-                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                Rectangle rectangle_down = getRectangle(point.x + 1, point.y);
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangleInFigure(rectangle_down))
                     return false;
-            }
-            else
+            } else
                 return false;
         }
         return true;
     }
 
-    public static boolean collision_left() {
-        for (Figures.Figure.Point point : figure)
-        {
+    private static boolean collisionLeft() {
+        for (Figures.Figure.Point point : figure.getFigure()) {
             if (point.x > 1) {
-                Rectangle rectangle_down = get_rectangle(point.x-1, point.y);
-                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangle_in_figure(rectangle_down))
+                Rectangle rectangle_down = getRectangle(point.x - 1, point.y);
+                if (!Objects.equals(rectangle_down.getFill().toString(), defaultColor) && !rectangleInFigure(rectangle_down))
                     return false;
-            }
-            else
+            } else
                 return false;
         }
         return true;
     }
 
-    public static void new_figure()
-    {
-        Pair<Integer, Figures.Figure.Point[]> temp = Figures.get_figure();
-        typeOfFigure = temp.getA();
-        figure = temp.getB();
-        nRotates = 0;
+    private static void newFigure() {
+        new Figures();
+        figure = Figures.getRandomFigure();
         int x0 = randint(1, 6); // поменять
-        int y0 = Figures.Figure.get_down(figure) - Figures.Figure.get_up(figure) + 1;
+        int y0 = figure.getDown() - figure.getUp() + 1;
         for (int i = 0; i < 4; i++) {
-            change_color(figure[i].x + x0, figure[i].y - y0, "0x0000FF");
-            figure[i].x += x0;
-            figure[i].y -= y0;
+            changeColor(figure.getFigure()[i].x + x0, figure.getFigure()[i].y - y0, figure.getColor());
+            figure.getFigure()[i].x += x0;
+            figure.getFigure()[i].y -= y0;
         }
 
     }
 
-    public static void move_down()
-    {
-        int yMax = Figures.Figure.get_down(figure);
-        for(; yMax != -4; yMax--) {
+    private static void moveDown() {
+        int yMax = figure.getDown();
+        for (; yMax != -4; yMax--) {
             for (int i = 0; i < 4; i++) {
-                if (figure[i].y == yMax) {
-                    int temp_y = figure[i].y;
-                    figure[i].y++;
-                    swap(figure[i].x, temp_y, figure[i].x, figure[i].y);
+                if (figure.getFigure()[i].y == yMax) {
+                    int temp_y = figure.getFigure()[i].y;
+                    figure.getFigure()[i].y++;
+                    swap(figure.getFigure()[i].x, temp_y, figure.getFigure()[i].x, figure.getFigure()[i].y);
                 }
             }
         }
     }
 
-    public static void move_up()
-    {
-        int yMin = Figures.Figure.get_up(figure);
-        System.out.println(yMin);
-        for(int k = 0; k < 4; k++, yMin++) {
-            for (int i = 0; i < 4; i++) {
-                if (figure[i].y == yMin) {
-                    int temp_y = figure[i].y;
-                    figure[i].y--;
-                    swap(figure[i].x, temp_y, figure[i].x, figure[i].y);
-                }
-            }
-        }
-    }
-
-    public static void move_right()
-    {
-        if(collision_right()) {
-            int xMax = Figures.Figure.get_right(figure);
+    private static void moveRight() {
+        if (collisionRight()) {
+            int xMax = figure.getRight();
             for (; xMax != -4; xMax--) {
                 for (int i = 0; i < 4; i++) {
-                    if (figure[i].x == xMax) {
-                        int temp_x = figure[i].x;
-                        figure[i].x++;
-                        swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                    if (figure.getFigure()[i].x == xMax) {
+                        int temp_x = figure.getFigure()[i].x;
+                        figure.getFigure()[i].x++;
+                        swap(temp_x, figure.getFigure()[i].y, figure.getFigure()[i].x, figure.getFigure()[i].y);
                     }
                 }
             }
         }
     }
 
-    public static void move_left() {
-        if (collision_left()) {
-            int xMin = Figures.Figure.get_left(figure);
-            System.out.println(xMin);
+    private static void moveLeft() {
+        if (collisionLeft()) {
+            int xMin = figure.getLeft();
             for (int k = 0; k < 4; k++, xMin++) {
                 for (int i = 0; i < 4; i++) {
-                    if (figure[i].x == xMin) {
-                        int temp_x = figure[i].x;
-                        figure[i].x--;
-                        swap(temp_x, figure[i].y, figure[i].x, figure[i].y);
+                    if (figure.getFigure()[i].x == xMin) {
+                        int temp_x = figure.getFigure()[i].x;
+                        figure.getFigure()[i].x--;
+                        swap(temp_x, figure.getFigure()[i].y, figure.getFigure()[i].x, figure.getFigure()[i].y);
                     }
                 }
             }
         }
     }
 
-    public static void rotate()
-    {
-        Figures.Figure.Point[] rotatedFigure = Figures.get_rotated_figure(figure, typeOfFigure, nRotates);
-        if(Figures.Figure.get_down(rotatedFigure) <= 20 && Figures.Figure.get_right(rotatedFigure) <= 10 && Figures.Figure.get_left(rotatedFigure) >= 1 && !figure_intersect(rotatedFigure))
-        {
-            for(Figures.Figure.Point point : figure)
-                change_color(point.x, point.y, defaultColor);
-            for(Figures.Figure.Point point : rotatedFigure)
-                change_color(point.x, point.y, "0x0000FF");
-            figure = rotatedFigure;
-            nRotates = nRotates == 3 ? 0 : nRotates + 1;
+    private static void rotate() {
+        Figures.Figure oldFigure = new Figures.Figure(figure);
+        figure.rotateFigure();
+        if (figure.getDown() <= 20 && figure.getRight() <= 10 && figure.getLeft() >= 1 && !figureIntersect()) {
+            for (Figures.Figure.Point point : oldFigure.getFigure())
+                changeColor(point.x, point.y, defaultColor);
+            for (Figures.Figure.Point point : figure.getFigure())
+                changeColor(point.x, point.y, figure.getColor());
         }
         else
-        {
-            System.out.println(Figures.Figure.get_down(rotatedFigure) <= 20);
-            System.out.println(Figures.Figure.get_right(rotatedFigure) <= 10);
-            System.out.println(Figures.Figure.get_left(rotatedFigure) >= 1);
-            System.out.println(!figure_intersect(rotatedFigure));
-        }
+            figure = oldFigure;
     }
 
-    public static void check_line()
-    {
-        for(int line = 1; line <= 20; line++)
-        {
+    private static boolean keepUnderBlock(int x, int y) {
+        if (y != 20)
+            return Objects.equals(getRectangle(x, y + 1).getFill().toString(), defaultColor) && !Objects.equals(getRectangle(x, y).getFill().toString(), defaultColor);
+        return false;
+    }
+
+    private static void checkLine() {
+        for (int line = 1; line <= 20; line++) {
             boolean filled = true;
-            for(int row = 1; row <= 10; row++)
-            {
-                if(Objects.equals(get_rectangle(row, line).getFill().toString(), defaultColor))
-                {
+            for (int row = 1; row <= 10; row++) {
+                if (Objects.equals(getRectangle(row, line).getFill().toString(), defaultColor)) {
                     filled = false;
                     break;
                 }
             }
-            if(filled)
-            {
-                for(int row = 1; row <= 10; row++)
-                    change_color(row, line, defaultColor);
-                for(int i = line; i >= 1; i--) {
+            if (filled) {
+                playerScore += 1000;
+                for (int row = 1; row <= 10; row++)
+                    changeColor(row, line, defaultColor);
+                for (int i = line; i >= 1; i--) {
                     for (int row = 1; row <= 10; row++) {
-                        swap(row, i - 1, row, i);
+                        int y = i;
+                        while (keepUnderBlock(row, y)) {
+                            swap(row, y, row, y + 1);
+                            y++;
+                        }
                     }
                 }
             }
         }
     }
-    public static void start_game()
-    {
-        new_figure();
+
+    public static void startGame() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent event) {
+                Platform.runLater(() -> {
+                    KeyCode key = event.getCode();
+                    if (collisionDown()) {
+                        try {
+                            switch (writeKeyCode(key)) {
+                                case 2 -> moveLeft();
+                                case 3 -> moveDown();
+                                case 4 -> moveRight();
+                                case 5 -> rotate();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
+                });
+            }
+        });
         Game game = new Game();
         Thread thread = new Thread(game);
         thread.start();
     }
 
-    public static class Game implements Runnable
+    private static void setLabelText(String text) {
+        TetrisController controller = (TetrisController) stage.getScene().getUserData();
+        Label label;
+        label = controller.getPlayerScoreLabel();
+        if (label != null) {
+            Platform.runLater(() -> label.setText(text));
+        }
+    }
+    private static void setVisibleButtonStart(boolean mode) {
+        TetrisController controller = (TetrisController) stage.getScene().getUserData();
+        Button button;
+        button = controller.getStartButton();
+        if (button != null) {
+            Platform.runLater(() -> button.setVisible(mode));
+        }
+    }
+
+
+    private static class Game implements Runnable
     {
         @Override
         public void run() {
+            setVisibleButtonStart(false);
             while (true)
             {
-                new_figure();
-                while (collision_down())
+                newFigure();
+                setLabelText(String.valueOf(playerScore));
+                while (collisionDown())
                 {
-                    move_down();
+                    moveDown();
                     try {
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(500 - playerScore / 100);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    check_line();
                 }
-                if(Figures.Figure.get_up(figure) == 1)
+                checkLine();
+                if(figure.getUp() <= 1) {
+                    setVisibleButtonStart(true);
+                    playerScore = 0;
                     return;
+                }
             }
         }
     }

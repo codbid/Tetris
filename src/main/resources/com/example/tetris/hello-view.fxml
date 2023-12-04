@@ -6,12 +6,12 @@
 
 <?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.tetris.HelloController">
+      fx:controller="com.example.tetris.TetrisController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label fx:id="welcomeText"/>
-    <Button fx:id="start" text="t!" onAction="#onHelloButtonClick"/>
+    <Button fx:id="starts" text="t!" onAction="#onHelloButtonClick"/>
 
 </VBox>
